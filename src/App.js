@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import TodoContainer from './components/TodoContainer'
+import './App.css'
+import { ContextProvider } from './DataContext'
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Todo List</h1>
       </header>
+      <main>
+        <ContextProvider>
+          <TodoContainer />
+        </ContextProvider>
+      </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
