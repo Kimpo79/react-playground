@@ -1,14 +1,14 @@
 import React from 'react'
 import { ContextConsumer } from '../DataContext'
+import debounce from '../utils/debouncer'
 
 const todoItemStyles = {
   display: 'flex',
-  justifyContent: 'space-between',
   width: '200px',
   margin: '5px auto'
 }
 
-const TodoItem = ({ item }) => {
+export default function TodoItem({ item }) {
   const { id, isCompleted, text } = item
   return (
     <ContextConsumer>
@@ -23,12 +23,17 @@ const TodoItem = ({ item }) => {
             type="text"
             defaultValue={text}
             placeholder="Start typing..."
-            onChange={(e) =>
-              dispatch({
-                type: 'update',
-                payload: { id: item.id, text: e.target.value }
-              })
-            }
+            onChange={({ target: { value } }) => {
+              debounce(
+                () =>
+                  dispatch({
+                    type: 'update',
+                    payload: { id: item.id, text: value }
+                  }),
+                item.id,
+                300
+              )
+            }}
           />
           <button onClick={() => dispatch({ type: 'delete', payload: id })}>
             X
@@ -38,5 +43,3 @@ const TodoItem = ({ item }) => {
     </ContextConsumer>
   )
 }
-
-export default TodoItem
