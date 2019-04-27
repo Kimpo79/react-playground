@@ -3,7 +3,7 @@ import TodoContainer from './components/TodoContainer'
 import './App.css'
 import { ContextProvider } from './DataContext'
 
-const App = () => {
+export default function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -17,5 +17,3 @@ const App = () => {
     </div>
   )
 }
-
-export default App

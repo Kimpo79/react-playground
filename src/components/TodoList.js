@@ -9,7 +9,7 @@ const todoListStyle = {
   minHeight: '60vh'
 }
 
-const TodoList = ({ items }) => {
+export default function TodoList({ items }) {
   return (
     <ul style={todoListStyle}>
       {items && items.map((item, i) => (
@@ -18,5 +18,3 @@ const TodoList = ({ items }) => {
     </ul>
   )
 }
-
-export default TodoList

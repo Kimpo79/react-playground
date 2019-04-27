@@ -2,7 +2,7 @@ import React, { useReducer, useEffect } from 'react'
 
 const { Provider, Consumer: ContextConsumer } = React.createContext()
 
-const todoReducer = (state, action) => {
+function todoReducer(state, action) {
   switch (action.type) {
     case 'add': {
       return [
@@ -39,7 +39,7 @@ const todoReducer = (state, action) => {
   }
 }
 
-const ContextProvider = ({ children }) => {
+function ContextProvider({ children }) {
   const [state, dispatch] = useReducer(todoReducer, [])
 
   useEffect(() => {

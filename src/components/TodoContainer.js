@@ -2,7 +2,7 @@ import React from 'react'
 import TodoList from './TodoList'
 import { ContextConsumer } from '../DataContext'
 
-const TodoContainer = () => {
+export default function TodoContainer() {
   return (
     <ContextConsumer>
       {({ state, dispatch }) => (
@@ -14,5 +14,3 @@ const TodoContainer = () => {
     </ContextConsumer>
   )
 }
-
-export default TodoContainer
