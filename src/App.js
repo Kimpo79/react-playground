@@ -1,7 +1,8 @@
 import React from 'react'
 import TodoContainer from './components/TodoContainer'
 import ListContainer from './components/ListContainer'
-import './App.css'
+import './styles/App.css'
+import './styles/components.css'
 import StateProvider from './context/StateProvider'
 
 export default function App() {

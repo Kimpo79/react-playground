@@ -1,9 +1,10 @@
 .App {
   text-align: center;
+  background-image: url('/wooden-bg.jpg');
+  background-size: cover;
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 20vh;
   display: flex;
   flex-direction: column;

@@ -3,6 +3,7 @@ import {
   listReducer,
   CREATE_LIST,
   SELECT_LIST,
+  DELETE_LIST,
   UPDATE_TODO,
   CREATE_TODO,
   DELETE_TODO,
@@ -19,6 +20,10 @@ const StateProvider = ({ children }) => {
 
   const createList = name => {
     dispatch({ type: CREATE_LIST, payload: { name: name } })
+  }
+
+  const deleteList = id => {
+    dispatch({ type: DELETE_LIST, payload: { id: id } })
   }
 
   const selectList = id => {
@@ -43,10 +48,9 @@ const StateProvider = ({ children }) => {
 
   useEffect(() => {
     const rawData = localStorage.getItem('todolist')
-    if(rawData) {
-      dispatch({ type: INITIALIZE_STATE, payload: JSON.parse(rawData)})
+    if (rawData) {
+      dispatch({ type: INITIALIZE_STATE, payload: JSON.parse(rawData) })
     }
-    
   }, [])
 
   useEffect(() => {
@@ -60,6 +64,7 @@ const StateProvider = ({ children }) => {
         selectedList: state.selectedList,
         createList: createList,
         selectList: selectList,
+        deleteList: deleteList,
         createTodo: createTodo,
         updateTodo: updateTodo,
         deleteTodo: deleteTodo,
