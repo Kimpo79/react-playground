@@ -1,45 +1,32 @@
-import React from 'react'
-import { ContextConsumer } from '../DataContext'
+import React, { useContext } from 'react'
+import ListContext from '../context/list-context'
 import debounce from '../utils/debouncer'
 
 const todoItemStyles = {
   display: 'flex',
-  width: '200px',
   margin: '5px auto'
 }
 
 export default function TodoItem({ item }) {
   const { id, isCompleted, text } = item
+  const context = useContext(ListContext)
+
   return (
-    <ContextConsumer>
-      {({ dispatch }) => (
-        <li style={todoItemStyles}>
-          <input
-            type="checkbox"
-            checked={isCompleted}
-            onChange={() => dispatch({ type: 'completed', payload: id })}
-          />
-          <input
-            type="text"
-            defaultValue={text}
-            placeholder="Start typing..."
-            onChange={({ target: { value } }) => {
-              debounce(
-                () =>
-                  dispatch({
-                    type: 'update',
-                    payload: { id: item.id, text: value }
-                  }),
-                item.id,
-                300
-              )
-            }}
-          />
-          <button onClick={() => dispatch({ type: 'delete', payload: id })}>
-            X
-          </button>
-        </li>
-      )}
-    </ContextConsumer>
+    <li style={todoItemStyles}>
+      <input
+        type="checkbox"
+        checked={isCompleted}
+        onChange={() => context.completeTodo(id)}
+      />
+      <input
+        type="text"
+        defaultValue={text}
+        placeholder="Start typing..."
+        onChange={({ target: { value } }) => {
+          debounce(() => context.updateTodo(item.id, value), item.id, 300)
+        }}
+      />
+      <button onClick={() => context.deleteTodo(id)}>X</button>
+    </li>
   )
 }
