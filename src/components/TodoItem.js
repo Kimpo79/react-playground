@@ -24,7 +24,7 @@ export default function TodoItem({ item }) {
           debounce(() => context.updateTodo(item.id, value), item.id, 300)
         }}
       />
-      <button className="todo-list-item__button" onClick={() => context.deleteTodo(id)}>
+      <button className="transparent-button" onClick={() => context.deleteTodo(id)}>
         <span role="img" aria-label="delete">❌</span>
       </button>
     </li>

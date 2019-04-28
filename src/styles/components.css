@@ -39,14 +39,18 @@
   padding: 2px;
   font-size: 1em;
   border-radius: 3px;
+  margin: 0 10px;
 }
 
 .todo-list-item__checkbox {
   zoom: 2;
 }
 
-.todo-list-item__button {
-  margin: '0 10px';
-  width: '50px';
-  border-radius: '3px';
+.transparent-button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
 }
