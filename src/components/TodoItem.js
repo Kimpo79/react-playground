@@ -28,7 +28,7 @@ export default function TodoItem({ item }) {
         onClick={() => context.deleteTodo(id)}
       >
         <span role="img" aria-label="delete">
-          ❌
+        🗑️
         </span>
       </button>
     </li>

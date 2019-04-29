@@ -15,6 +15,11 @@ export default function ListItem({ item }) {
     setIsEditing(false)
   }
 
+  const handleCancelEdit = () => {
+    setIsEditing(false)
+    setListName(item.name)
+  }
+
   const handleDeleteLIst = () => {
     if(window.confirm(`Do you really want to delete ${item.name} list`)) {
       context.deleteList(item.id)
@@ -46,7 +51,7 @@ export default function ListItem({ item }) {
             </button>
             <button
               className="transparent-button"
-              onClick={() => setIsEditing(false)}
+              onClick={() => handleCancelEdit()}
             >
               <span role="img" aria-label="cancel edit">
                 ❌

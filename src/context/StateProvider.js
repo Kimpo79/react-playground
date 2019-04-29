@@ -8,7 +8,7 @@ import {
   UPDATE_TODO,
   CREATE_TODO,
   DELETE_TODO,
-  TODO_COMPLETED,
+  COMPLETE_TODO,
   INITIALIZE_STATE
 } from './reducers'
 
@@ -56,7 +56,7 @@ const StateProvider = ({ children }) => {
   }
 
   const completeTodo = id => {
-    dispatch({ type: TODO_COMPLETED, payload: { id: id } })
+    dispatch({ type: COMPLETE_TODO, payload: { id: id } })
   }
 
   useEffect(() => {

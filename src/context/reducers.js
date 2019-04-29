@@ -7,7 +7,7 @@ export const UPDATE_LIST = 'UPDATE_LIST'
 export const UPDATE_TODO = 'UPDATE_TODO'
 export const CREATE_TODO = 'CREATE_TODO'
 export const DELETE_TODO = 'DELETE_TODO'
-export const TODO_COMPLETED = 'TODO_COMPLETED'
+export const COMPLETE_TODO = 'COMPLETE_TODO'
 export const INITIALIZE_STATE = 'INITIALIZE_STATE'
 
 export function listReducer(state, action) {
@@ -33,8 +33,8 @@ export function listReducer(state, action) {
     case DELETE_TODO: {
       return deleteTodo(state, action)
     }
-    case TODO_COMPLETED: {
-      return todoCompleted(state, action)
+    case COMPLETE_TODO: {
+      return completeTodo(state, action)
     }
     case INITIALIZE_STATE: {
       return initializeState(state, action)
@@ -128,7 +128,7 @@ const deleteTodo = (state, action) => {
   }
 }
 
-const todoCompleted = (state, action) => {
+const completeTodo = (state, action) => {
   return {
     ...state,
     todos: {
