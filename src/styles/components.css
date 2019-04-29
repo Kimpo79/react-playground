@@ -17,6 +17,7 @@
   background-color: rgba(0, 0, 0, 0.4);
   color: #fff;
   padding: 10px;
+  border-radius: 3px;
 }
 
 .list-container__item:hover {
@@ -28,7 +29,7 @@
 }
 
 .selected {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(49, 143, 46, 0.8);
 }
 
 .todo-list {
@@ -62,4 +63,43 @@
   cursor:pointer;
   overflow: hidden;
   outline:none;
+}
+
+/* Progressive BG Image Loader */
+
+.progressive-image-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.progressive-image-preload {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+}
+
+.progressive-image-loaded {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.progressive-image-fade-in {
+  opacity: 1;
+}
+
+.progressive-image-content {
+  z-index: 3;
+  position: relative;
+  opacity: 1;
 }

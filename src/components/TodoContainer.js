@@ -4,7 +4,6 @@ import ListContext from '../context/list-context'
 
 export default function TodoContainer() {
   const context = useContext(ListContext)
-  console.log('TODO CONTAINER: ', context)
   return (
     <>
       {context.selectedListId && (
