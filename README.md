@@ -1,7 +1,10 @@
 ## My React Playground
 
-Just a random project trying out CRUD behaviour with Hooks and Context API
+A todo list app trying out Hooks and Context API
 
-and no classes 😮
+Constraints for this project
+
+- No classes
+- No NPM modules besides what is provided by CRA
 
 Demo website: https://wonderful-hamilton-dc5485.netlify.com/
