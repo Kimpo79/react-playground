@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import ListContext from '../context/list-context'
+import { ListContext } from '../context/StateProvider'
 import ListItem from './ListItem'
 
 export default function ListContainer() {
@@ -7,10 +7,15 @@ export default function ListContainer() {
 
   return (
     <aside className="list-container sidebar">
-      <button onClick={() => context.createList('Give me a name')}>Create List</button>
       <ul className="list-container__list">
-        {Object.keys(context.lists).map(key => (
-          <ListItem key={key} item={context.lists[key]} />
+        <li className="list-container__item">
+          <input type="text" />
+          <button onClick={() => context.createList('Give me a name')}>
+            Add List
+          </button>
+        </li>
+        {Object.values(context.lists).map(list => (
+          <ListItem key={list.id} item={list} />
         ))}
       </ul>
     </aside>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import TodoList from './TodoList'
-import ListContext from '../context/list-context'
+import { ListContext } from '../context/StateProvider'
 
 export default function TodoContainer() {
   const context = useContext(ListContext)
@@ -8,7 +8,6 @@ export default function TodoContainer() {
     <>
       {context.selectedListId && (
         <div className="list-container content">
-          <button onClick={() => context.createTodo()}>Add Todo</button>
           <TodoList
             items={Object.values(context.todos).filter(
               todoItem => todoItem.listId === context.selectedListId

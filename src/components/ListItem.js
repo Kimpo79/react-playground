@@ -1,5 +1,5 @@
 import React from 'react'
-import ListContext from '../context/list-context'
+import { ListContext } from '../context/StateProvider'
 
 export default function ListItem({ item }) {
   return (
@@ -13,22 +13,22 @@ export default function ListItem({ item }) {
         >
           <span>{item.name}</span>
           <span className="list-container__actions">
-          <button
-            className="transparent-button"
-            onClick={() => context.editList(item.id)}
-          >
-            <span role="img" aria-label="edit">
-            🖊️
-            </span>
-          </button>
-          <button
-            className="transparent-button"
-            onClick={() => context.deleteList(item.id)}
-          >
-            <span role="img" aria-label="delete">
-              ❌
-            </span>
-          </button>
+            <button
+              className="transparent-button"
+              onClick={() => context.editList(item.id)}
+            >
+              <span role="img" aria-label="edit">
+                🖊️
+              </span>
+            </button>
+            <button
+              className="transparent-button"
+              onClick={() => context.deleteList(item.id)}
+            >
+              <span role="img" aria-label="delete">
+                ❌
+              </span>
+            </button>
           </span>
         </li>
       )}

@@ -10,7 +10,14 @@ import {
   TODO_COMPLETED,
   INITIALIZE_STATE
 } from './reducers'
-import ListContext from './list-context'
+
+export const ListContext = React.createContext({
+  lists: {},
+  todos: {},
+  selectedListId: '',
+  createList: name => {},
+  selectList: id => {}
+})
 
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(listReducer, {
@@ -31,8 +38,8 @@ const StateProvider = ({ children }) => {
     dispatch({ type: SELECT_LIST, payload: { id: id } })
   }
 
-  const createTodo = () => {
-    dispatch({ type: CREATE_TODO })
+  const createTodo = (text) => {
+    dispatch({ type: CREATE_TODO, payload: { text: text }  })
   }
 
   const updateTodo = (id, text) => {

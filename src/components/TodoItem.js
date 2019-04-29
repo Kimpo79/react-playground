@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
-import ListContext from '../context/list-context'
+import { ListContext } from '../context/StateProvider'
 import debounce from '../utils/debouncer'
-
 
 export default function TodoItem({ item }) {
   const { id, isCompleted, text } = item
@@ -24,8 +23,13 @@ export default function TodoItem({ item }) {
           debounce(() => context.updateTodo(item.id, value), item.id, 300)
         }}
       />
-      <button className="transparent-button" onClick={() => context.deleteTodo(id)}>
-        <span role="img" aria-label="delete">❌</span>
+      <button
+        className="transparent-button"
+        onClick={() => context.deleteTodo(id)}
+      >
+        <span role="img" aria-label="delete">
+          ❌
+        </span>
       </button>
     </li>
   )

@@ -7,12 +7,12 @@
 .list-container__list {
   width: 100%;
   padding: 0;
+  list-style-type: none;
 }
 
 .list-container__item {
   display: flex;
   margin: 5px auto;
-  list-style-type: none;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.4);
   color: #fff;
@@ -34,6 +34,7 @@
 
 .todo-list {
   padding: 0;
+  list-style-type: none;
 }
 
 .todo-list-item {
@@ -47,7 +48,7 @@
 .todo-list-item__text {
   width: 100%;
   padding: 2px;
-  font-size: 0.8em;
+  font-size: 0.9em;
   border-radius: 3px;
   margin: 0 10px;
 }
@@ -73,23 +74,29 @@
 }
 
 .progressive-image-preload {
-  position: absolute;
+  position: fixed;
   z-index: 1;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .progressive-image-loaded {
-  position: absolute;
+  position: fixed;
   z-index: 2;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
+  background-attachment: fixed;
   opacity: 0;
   transition: opacity 2s ease;
 }
