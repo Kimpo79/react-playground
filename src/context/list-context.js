@@ -2,7 +2,8 @@ import React from 'react'
 
 export default React.createContext({
   lists: {},
-  selectedList: null,
+  todos: {},
+  selectedListId: '',
   createList: name => {},
   selectList: id => {}
 })

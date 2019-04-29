@@ -15,7 +15,8 @@ import ListContext from './list-context'
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(listReducer, {
     lists: {},
-    selectedList: {}
+    todos: {},
+    selectedListId: ''
   })
 
   const createList = name => {
@@ -61,7 +62,8 @@ const StateProvider = ({ children }) => {
     <ListContext.Provider
       value={{
         lists: state.lists,
-        selectedList: state.selectedList,
+        todos: state.todos,
+        selectedListId: state.selectedListId,
         createList: createList,
         selectList: selectList,
         deleteList: deleteList,

@@ -48,44 +48,45 @@ const createList = (state, action) => {
       ...state.lists,
       [id]: {
         id: id,
-        name: action.payload.name,
-        items: []
+        name: action.payload.name
       }
-    }
+    },
+    selectedListId: id
   }
 }
 
 const selectList = (state, listId) => {
   return {
     ...state,
-    lists: {
-      ...state.lists,
-      [state.selectedList.id]: state.selectedList
-    },
-    selectedList: state.lists[listId]
+    selectedListId: listId
   }
 }
 
 const deleteList = (state, action) => {
   delete state.lists[action.payload.id]
   return {
-    ...state
+    ...state,
+    todos: Object.keys(state.todos)
+      .filter(key => state.todos[key].listId !== action.payload.id)
+      .reduce((acc, curr) => {
+        acc[curr] = state.todos[curr]
+        return acc
+      }, {})
   }
 }
 
 const createTodo = (state, action) => {
+  const id = uuid()
   return {
     ...state,
-    selectedList: {
-      ...state.selectedList,
-      items: [
-        ...state.selectedList.items,
-        {
-          id: uuid(),
-          text: action.payload,
-          isCompleted: false
-        }
-      ]
+    todos: {
+      ...state.todos,
+      [id]: {
+        id: id,
+        text: action.payload,
+        isCompleted: false,
+        listId: state.selectedListId
+      }
     }
   }
 }
@@ -93,45 +94,32 @@ const createTodo = (state, action) => {
 const updateTodo = (state, action) => {
   return {
     ...state,
-    selectedList: {
-      ...state.selectedList,
-      items: [
-        ...state.selectedList.items.map(item =>
-          item.id === action.payload.id
-            ? { ...item, text: action.payload.text }
-            : item
-        )
-      ]
+    todos: {
+      ...state.todos,
+      [action.payload.id]: {
+        ...state.todos[action.payload.id],
+        text: action.payload.text
+      }
     }
   }
 }
 
 const deleteTodo = (state, action) => {
+  delete state.todos[action.payload.id]
   return {
-    ...state,
-    selectedList: {
-      ...state.selectedList,
-      items: [
-        ...state.selectedList.items.filter(
-          item => item.id !== action.payload.id
-        )
-      ]
-    }
+    ...state
   }
 }
 
 const todoCompleted = (state, action) => {
   return {
     ...state,
-    selectedList: {
-      ...state.selectedList,
-      items: [
-        ...state.selectedList.items.map(item =>
-          item.id === action.payload.id
-            ? { ...item, isCompleted: !item.isCompleted }
-            : item
-        )
-      ]
+    todos: {
+      ...state.todos,
+      [action.payload.id]: {
+        ...state.todos[action.payload.id],
+        isCompleted: !state.todos[action.payload.id].isCompleted
+      }
     }
   }
 }

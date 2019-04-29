@@ -7,8 +7,8 @@ export default function ListContainer() {
 
   return (
     <aside className="list-container sidebar">
-      <button onClick={() => context.createList('HELLOOO')}>Create List</button>
-      <ul>
+      <button onClick={() => context.createList('Give me a name')}>Create List</button>
+      <ul className="list-container__list">
         {Object.keys(context.lists).map(key => (
           <ListItem key={key} item={context.lists[key]} />
         ))}
