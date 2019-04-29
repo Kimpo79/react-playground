@@ -18,7 +18,7 @@ export default function TodoItem({ item }) {
         type="text"
         defaultValue={text}
         className="todo-list-item__text"
-        placeholder="Start typing..."
+        placeholder="Todo is empty :("
         onChange={({ target: { value } }) => {
           debounce(() => context.updateTodo(item.id, value), item.id, 300)
         }}

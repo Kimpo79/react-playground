@@ -14,7 +14,7 @@
   display: flex;
   margin: 5px auto;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
   padding: 10px;
   border-radius: 2px;
@@ -40,7 +40,7 @@
 }
 
 .selected {
-  background-color: rgba(49, 143, 46, 0.8);
+  background-color: rgba(18, 59, 16, 0.9);
 }
 
 .todo-list {

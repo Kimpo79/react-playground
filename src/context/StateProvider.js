@@ -4,6 +4,7 @@ import {
   CREATE_LIST,
   SELECT_LIST,
   DELETE_LIST,
+  UPDATE_LIST,
   UPDATE_TODO,
   CREATE_TODO,
   DELETE_TODO,
@@ -36,6 +37,10 @@ const StateProvider = ({ children }) => {
 
   const selectList = id => {
     dispatch({ type: SELECT_LIST, payload: { id: id } })
+  }
+
+  const updateList = (id, name) => {
+    dispatch({ type: UPDATE_LIST, payload: { id: id, name: name }  })
   }
 
   const createTodo = (text) => {
@@ -74,6 +79,7 @@ const StateProvider = ({ children }) => {
         createList: createList,
         selectList: selectList,
         deleteList: deleteList,
+        updateList: updateList,
         createTodo: createTodo,
         updateTodo: updateTodo,
         deleteTodo: deleteTodo,

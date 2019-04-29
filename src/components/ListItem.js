@@ -1,37 +1,77 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { ListContext } from '../context/StateProvider'
 
 export default function ListItem({ item }) {
+  const context = useContext(ListContext)
+  const [listName, setListName] = useState(item.name)
+  const [isEditing, setIsEditing] = useState(false)
+
+  const handleChange = e => {
+    setListName(e.target.value)
+  }
+
+  const handleUpdateList = () => {
+    context.updateList(item.id, listName)
+    setIsEditing(false)
+  }
+
+  const handleDeleteLIst = () => {
+    if(window.confirm(`Do you really want to delete ${item.name} list`)) {
+      context.deleteList(item.id)
+    }
+  }
+
   return (
-    <ListContext.Consumer>
-      {context => (
-        <li
-          onClick={() => context.selectList(item.id)}
-          className={`list-container__item ${
-            context.selectedListId === item.id ? 'selected' : ''
-          }`}
-        >
-          <span>{item.name}</span>
-          <span className="list-container__actions">
+    <li
+      onClick={() => context.selectList(item.id)}
+      className={`list-container__item ${
+        context.selectedListId === item.id ? 'selected' : ''
+      }`}
+    >
+      {isEditing ? (
+        <input type="text" value={listName} onChange={handleChange} />
+      ) : (
+        <span>{item.name}</span>
+      )}
+      <span className="list-container__actions">
+        {isEditing ? (
+          <>
             <button
               className="transparent-button"
-              onClick={() => context.editList(item.id)}
+              onClick={() => handleUpdateList()}
             >
               <span role="img" aria-label="edit">
-                🖊️
+                ✅
               </span>
             </button>
             <button
               className="transparent-button"
-              onClick={() => context.deleteList(item.id)}
+              onClick={() => setIsEditing(false)}
             >
-              <span role="img" aria-label="delete">
+              <span role="img" aria-label="cancel edit">
                 ❌
               </span>
             </button>
-          </span>
-        </li>
-      )}
-    </ListContext.Consumer>
+            <button
+              className="transparent-button"
+              onClick={() => handleDeleteLIst()}
+            >
+              <span role="img" aria-label="delete list">
+                🗑️
+              </span>
+            </button>
+          </>
+        ) : (
+          <button
+            className="transparent-button"
+            onClick={() => setIsEditing(true)}
+          >
+            <span role="img" aria-label="edit">
+              🖊️
+            </span>
+          </button>
+        )}
+      </span>
+    </li>
   )
 }

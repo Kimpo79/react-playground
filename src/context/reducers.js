@@ -3,6 +3,7 @@ import uuid from '../utils/uuid'
 export const CREATE_LIST = 'CREATE_LIST'
 export const SELECT_LIST = 'SELECT_LIST'
 export const DELETE_LIST = 'DELETE_LIST'
+export const UPDATE_LIST = 'UPDATE_LIST'
 export const UPDATE_TODO = 'UPDATE_TODO'
 export const CREATE_TODO = 'CREATE_TODO'
 export const DELETE_TODO = 'DELETE_TODO'
@@ -19,6 +20,9 @@ export function listReducer(state, action) {
     }
     case DELETE_LIST: {
       return deleteList(state, action)
+    }
+    case UPDATE_LIST: {
+      return updateList(state, action)
     }
     case CREATE_TODO: {
       return createTodo(state, action)
@@ -72,6 +76,19 @@ const deleteList = (state, action) => {
         acc[curr] = state.todos[curr]
         return acc
       }, {})
+  }
+}
+
+const updateList = (state, action) => {
+  return {
+    ...state,
+    lists: {
+      ...state.lists,
+      [action.payload.id]: {
+        ...state.lists[action.payload.id],
+        name: action.payload.name
+      }
+    }
   }
 }
 

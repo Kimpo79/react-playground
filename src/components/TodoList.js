@@ -29,6 +29,7 @@ export default function TodoList({ items }) {
           onKeyDown={handleOnKeyDown}
           onChange={handleChange}
           className="todo-list-item__text"
+          placeholder="Write down your todo here..."
           type="text"
         />
         <button onClick={() => handleCreateTodo()}>Add Todo</button>
