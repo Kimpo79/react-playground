@@ -1,7 +1,12 @@
 .list-container {
   margin: 0 0 0 10px;
-  padding: 20px;
+  padding: 10px;
   min-height: 80vh;
+}
+
+.list-container__list {
+  width: 100%;
+  padding: 0;
 }
 
 .list-container__item {
@@ -16,6 +21,10 @@
 
 .list-container__item:hover {
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.list-container__actions {
+  margin-left: auto;
 }
 
 .selected {
@@ -37,13 +46,13 @@
 .todo-list-item__text {
   width: 100%;
   padding: 2px;
-  font-size: 1em;
+  font-size: 0.8em;
   border-radius: 3px;
   margin: 0 10px;
 }
 
 .todo-list-item__checkbox {
-  zoom: 2;
+  zoom: 1.5;
 }
 
 .transparent-button {
