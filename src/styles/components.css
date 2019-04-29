@@ -17,11 +17,22 @@
   background-color: rgba(0, 0, 0, 0.4);
   color: #fff;
   padding: 10px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 .list-container__item:hover {
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.list-container__name-input {
+  background-color: #efefef;
+  width: 100%;
+  padding: 5px;
+  font-size: 0.9em;
+  border-radius: 2px;
+  outline:none;
+  border: none;
+  margin-right: 5px;
 }
 
 .list-container__actions {
@@ -40,17 +51,22 @@
 .todo-list-item {
   display: flex;
   margin: 5px auto;
-  border-radius: 3px;
+  border-radius: 2px;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.4);
 }
 
 .todo-list-item__text {
+  background-color: #efefef;
   width: 100%;
   padding: 2px;
   font-size: 0.9em;
-  border-radius: 3px;
+  border-radius: 2px;
   margin: 0 10px;
+  padding: 5px;
+  font-size: 0.9em;
+  outline:none;
+  border: none;
 }
 
 .todo-list-item__checkbox {
