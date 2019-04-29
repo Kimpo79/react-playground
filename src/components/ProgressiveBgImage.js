@@ -4,10 +4,10 @@ export default ({ hqImage, lqImage, children }) => {
   const [isLoaded, setLoadingState] = useState(false)
 
   useEffect(() => {
-    const hqImage = new Image()
-    hqImage.src = hqImage
-    hqImage.onload = setLoadingState(true)
-  }, [])
+    const image = new Image()
+    image.src = hqImage
+    image.onload = () => setLoadingState(true)
+  }, [hqImage])
 
   return (
     <div className="progressive-image-container">
