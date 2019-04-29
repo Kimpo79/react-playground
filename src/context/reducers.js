@@ -80,13 +80,13 @@ const createTodo = (state, action) => {
   return {
     ...state,
     todos: {
-      ...state.todos,
       [id]: {
         id: id,
-        text: action.payload,
+        text: action.payload.text,
         isCompleted: false,
         listId: state.selectedListId
-      }
+      },
+      ...state.todos
     }
   }
 }
