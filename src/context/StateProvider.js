@@ -12,13 +12,7 @@ import {
   INITIALIZE_STATE
 } from './reducers'
 
-export const ListContext = React.createContext({
-  lists: {},
-  todos: {},
-  selectedListId: '',
-  createList: name => {},
-  selectList: id => {}
-})
+export const ListContext = React.createContext()
 
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer(listReducer, {

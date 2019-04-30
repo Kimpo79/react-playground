@@ -11,136 +11,112 @@ export const COMPLETE_TODO = 'COMPLETE_TODO'
 export const INITIALIZE_STATE = 'INITIALIZE_STATE'
 
 export function listReducer(state, action) {
-  switch (action.type) {
-    case CREATE_LIST: {
-      return createList(state, action)
-    }
-    case SELECT_LIST: {
-      return selectList(state, action.payload.id)
-    }
-    case DELETE_LIST: {
-      return deleteList(state, action)
-    }
-    case UPDATE_LIST: {
-      return updateList(state, action)
-    }
-    case CREATE_TODO: {
-      return createTodo(state, action)
-    }
-    case UPDATE_TODO: {
-      return updateTodo(state, action)
-    }
-    case DELETE_TODO: {
-      return deleteTodo(state, action)
-    }
-    case COMPLETE_TODO: {
-      return completeTodo(state, action)
-    }
-    case INITIALIZE_STATE: {
-      return initializeState(state, action)
-    }
-    default:
-      break
+  if (!actionHandlers[action.type]) {
+    console.log('No handler for action type: ', action.type)
+    return {...state}
   }
+  return actionHandlers[action.type](state, action)
 }
 
-const createList = (state, action) => {
-  const id = uuid()
-  return {
-    ...state,
-    lists: {
-      ...state.lists,
-      [id]: {
-        id: id,
-        name: action.payload.name
-      }
-    },
-    selectedListId: id
-  }
-}
-
-const selectList = (state, listId) => {
-  return {
-    ...state,
-    selectedListId: listId
-  }
-}
-
-const deleteList = (state, action) => {
-  delete state.lists[action.payload.id]
-  return {
-    ...state,
-    todos: Object.keys(state.todos)
-      .filter(key => state.todos[key].listId !== action.payload.id)
-      .reduce((acc, curr) => {
-        acc[curr] = state.todos[curr]
-        return acc
-      }, {})
-  }
-}
-
-const updateList = (state, action) => {
-  return {
-    ...state,
-    lists: {
-      ...state.lists,
-      [action.payload.id]: {
-        ...state.lists[action.payload.id],
-        name: action.payload.name
-      }
-    }
-  }
-}
-
-const createTodo = (state, action) => {
-  const id = uuid()
-  return {
-    ...state,
-    todos: {
-      [id]: {
-        id: id,
-        text: action.payload.text,
-        isCompleted: false,
-        listId: state.selectedListId
+const actionHandlers = {
+  [CREATE_LIST](state, action) {
+    const id = uuid()
+    return {
+      ...state,
+      lists: {
+        ...state.lists,
+        [id]: {
+          id: id,
+          name: action.payload.name
+        }
       },
-      ...state.todos
+      selectedListId: id
     }
-  }
-}
+  },
 
-const updateTodo = (state, action) => {
-  return {
-    ...state,
-    todos: {
-      ...state.todos,
-      [action.payload.id]: {
-        ...state.todos[action.payload.id],
-        text: action.payload.text
+  [SELECT_LIST](state, action) {
+    return {
+      ...state,
+      selectedListId: action.payload.id
+    }
+  },
+
+  [DELETE_LIST](state, action) {
+    delete state.lists[action.payload.id]
+    return {
+      ...state,
+      todos: Object.keys(state.todos)
+        .filter(key => state.todos[key].listId !== action.payload.id)
+        .reduce((acc, curr) => {
+          acc[curr] = state.todos[curr]
+          return acc
+        }, {})
+    }
+  },
+
+  [UPDATE_LIST](state, action) {
+    return {
+      ...state,
+      lists: {
+        ...state.lists,
+        [action.payload.id]: {
+          ...state.lists[action.payload.id],
+          name: action.payload.name
+        }
       }
     }
-  }
-}
+  },
 
-const deleteTodo = (state, action) => {
-  delete state.todos[action.payload.id]
-  return {
-    ...state
-  }
-}
-
-const completeTodo = (state, action) => {
-  return {
-    ...state,
-    todos: {
-      ...state.todos,
-      [action.payload.id]: {
-        ...state.todos[action.payload.id],
-        isCompleted: !state.todos[action.payload.id].isCompleted
+  [CREATE_TODO](state, action) {
+    const id = uuid()
+    return {
+      ...state,
+      todos: {
+        [id]: {
+          id: id,
+          text: action.payload.text,
+          isCompleted: false,
+          listId: state.selectedListId
+        },
+        ...state.todos
       }
     }
-  }
-}
+  },
 
-const initializeState = (state, action) => {
-  return { ...action.payload }
+  [UPDATE_TODO](state, action) {
+    return {
+      ...state,
+      todos: {
+        ...state.todos,
+        [action.payload.id]: {
+          ...state.todos[action.payload.id],
+          text: action.payload.text
+        }
+      }
+    }
+  },
+
+  [DELETE_TODO](state, action) {
+    delete state.todos[action.payload.id]
+    return {
+      ...state
+    }
+  },
+
+  [COMPLETE_TODO](state, action) {
+    return {
+      ...state,
+      todos: {
+        ...state.todos,
+        [action.payload.id]: {
+          ...state.todos[action.payload.id],
+          isCompleted: !state.todos[action.payload.id].isCompleted
+        }
+      }
+    }
+  },
+
+  [INITIALIZE_STATE](state, action) {
+    return { ...state, ...action.payload }
+  }
 }
